@@ -107,6 +107,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen">
+      {/* Background image and overlay */}
       <div className="fixed inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1170&auto=format&fit=crop"
@@ -114,6 +115,15 @@ export default function Home() {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
+      </div>
+
+      {/* QR CODE – TOP LEFT (fixed) */}
+      <div className="fixed top-4 left-4 z-30 bg-black/40 backdrop-blur-sm rounded-xl p-2 shadow-lg">
+        <img
+          src="/qrcode.png"     // Make sure your QR code image is in the public folder
+          alt="Scan QR Code"
+          className="w-24 h-24 md:w-32 md:h-32 object-contain"
+        />
       </div>
 
       <div className="relative z-10">
@@ -130,7 +140,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {/* Logo replaces the text RECIPE FINDER */}
+              {/* Logo */}
               <div className="flex justify-center mb-6">
                 <img
                   src="/my-logo.png"
@@ -252,7 +262,7 @@ export default function Home() {
   );
 }
 
-// FeatureCard component
+// FeatureCard component (unchanged)
 function FeatureCard({ icon: Icon, title, description, actionLabel, onAction }: any) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
@@ -281,7 +291,7 @@ function FeatureCard({ icon: Icon, title, description, actionLabel, onAction }: 
   );
 }
 
-// Recipe Modal component
+// Recipe Modal component (unchanged)
 function RecipeModal({ recipe, onClose }: { recipe: any; onClose: () => void }) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {

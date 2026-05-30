@@ -35,7 +35,6 @@ export default function ResultScreen({ result, onBack }: ResultScreenProps) {
     return acc;
   }, {} as Record<string, Recipe[]>);
 
-  
   for (const cat in grouped) {
     if (grouped[cat].length > 5) grouped[cat] = grouped[cat].slice(0, 5);
   }
@@ -43,7 +42,6 @@ export default function ResultScreen({ result, onBack }: ResultScreenProps) {
   const openModal = (recipe: Recipe) => {
     setSelectedRecipe(recipe);
     setIsModalOpen(true);
-   
     document.body.style.overflow = 'hidden';
   };
 
@@ -52,7 +50,6 @@ export default function ResultScreen({ result, onBack }: ResultScreenProps) {
     document.body.style.overflow = 'unset';
   };
 
-  
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeModal();
@@ -78,8 +75,17 @@ export default function ResultScreen({ result, onBack }: ResultScreenProps) {
         <button onClick={onBack} className="mb-6 flex items-center gap-2 text-white/80 hover:text-white">
           <ArrowLeft size={20} /> Back to Home
         </button>
-        <h1 className="text-4xl font-bold text-white mb-2">Recipe Suggestions</h1>
-        <p className="text-white/80 mb-8"></p>
+
+        {/* Heading + Legend row - with larger legend pill */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <h1 className="text-4xl font-bold text-white">Recipe Suggestions</h1>
+          {/* Legend – bigger text, more padding */}
+          <div className="flex flex-wrap gap-4 text-sm text-white/80 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+            <span className="flex items-center gap-1.5">⏱️ Prep time</span>
+            <span className="flex items-center gap-1.5">🍳 Cook time</span>
+            <span className="flex items-center gap-1.5">👥 Servings</span>
+          </div>
+        </div>
 
         {Object.entries(grouped).map(([category, recipes]) => (
           <div key={category} className="mb-12">
@@ -132,7 +138,6 @@ export default function ResultScreen({ result, onBack }: ResultScreenProps) {
               onClick={(e) => e.stopPropagation()}
               className="relative bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8"
             >
-              {/* Close button */}
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition"
@@ -140,7 +145,6 @@ export default function ResultScreen({ result, onBack }: ResultScreenProps) {
                 <X size={20} />
               </button>
 
-              {/* Recipe details (same as before, no back button needed) */}
               <h1 className="text-3xl md:text-4xl font-bold text-gray-800 pr-8">{selectedRecipe.name}</h1>
               <div className="flex flex-wrap gap-2 mt-2 mb-4">
                 <span className="bg-primary-yellow/20 text-primary-yellow-dark px-3 py-1 rounded-full text-sm font-semibold">
